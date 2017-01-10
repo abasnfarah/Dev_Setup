@@ -32,7 +32,9 @@ alias va="cd ~/Documents/repo/vague"
 alias sp="va && ./start-proxy.sh"
 alias vh="vagrant halt"
 alias murder="vagrant destroy"
+alias vr="vagrant reload"
 alias vprof="vim ~/.vimrc"
+alias vp="vagrant provision"
 
 # Java Compiling and running
 alias jc="javac"
