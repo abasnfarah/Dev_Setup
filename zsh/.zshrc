@@ -6,9 +6,9 @@ export ZSH=/Users/AbasFarah/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="norm"
-# archey
-screenfetch
-echo "You are fucking Awesome brahh"
+ archey
+# screenfetch
+
 # Uncomment the following line to use case-sensitive completion.
 
 
@@ -28,6 +28,11 @@ alias idle="open -a idle"
 alias reprof="source ~/.zshrc"
 alias v="vim"
 alias ht="goals && open Habit*"
+alias va="cd ~/Documents/repo/vague"
+alias sp="va && ./start-proxy.sh"
+alias vh="vagrant halt"
+alias murder="vagrant destroy"
+alias vprof="vim ~/.vimrc"
 
 # Java Compiling and running
 alias jc="javac"
