@@ -6,6 +6,7 @@ noremap <F2> :set invpaste paste?<CR>i
 set pastetoggle=<F2>
 
 
+
 :nmap <c-s> :w<CR>
 :imap <c-s> <Esc>:w<CR>a
 :imap <c-s> <Esc><c-s>
@@ -26,7 +27,7 @@ filetype plugin indent on
 au BufReadPost,BufNewFile *.twig colorscheme koehler 
 au BufReadPost,BufNewFile *.css colorscheme slate
 au BufReadPost,BufNewFile *.js colorscheme slate2
-au BufReadPost,BufNewFile *.py colorscheme molokaiyo
+au BufReadPost,BufNewFile *.py colorscheme slate2
 au BufReadPost,BufNewFile *.html colorscheme monokai
 au BufReadPost,BufNewFile *.java colorscheme monokai
 " au BufReadPost,BufNewFile *.php colorscheme monokai
