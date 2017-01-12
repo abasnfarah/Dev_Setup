@@ -25,7 +25,7 @@ ZSH_THEME="norm"
 alias subl="open -a sublime\ text"
 alias prof="vim ~/.zshrc"
 alias idle="open -a idle"
-alias reprof="source ~/.zshrc"
+alias reprof="clear && source ~/.zshrc"
 alias v="vim"
 alias ht="goals && open Habit*"
 alias va="cd ~/Documents/repo/vague"
@@ -35,12 +35,15 @@ alias murder="vagrant destroy"
 alias vr="vagrant reload"
 alias vprof="vim ~/.vimrc"
 alias vp="vagrant provision"
+alias workon="source /Users/farah127/Documents/websiteEnv/bin/activate"
 
 # Java Compiling and running
 alias jc="javac"
 alias j="java"
 
 # File jumping
+
+
 function sc9 {
     cd ~/Documents/Summer\ 2016/CSCI\ 1933\ Intro\ to\ alg\ and\ data\ struc/
 }
