@@ -35,7 +35,8 @@ alias murder="vagrant destroy"
 alias vr="vagrant reload"
 alias vprof="vim ~/.vimrc"
 alias vp="vagrant provision"
-alias workon="source /Users/farah127/Documents/websiteEnv/bin/activate"
+alias workon="source ~/Documents/Personal_Projects/abasfarah.com/env/bin/activate"
+#alias workon="source /Users/farah127/Documents/websiteEnv/bin/activate"
 
 # Java Compiling and running
 alias jc="javac"
