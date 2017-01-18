@@ -26,6 +26,7 @@ alias subl="open -a sublime\ text"
 alias prof="vim ~/.zshrc"
 alias idle="open -a idle"
 alias reprof="clear && source ~/.zshrc"
+alias vprof="vim ~/.vimrc"
 alias v="vim"
 alias ht="goals && open Habit*"
 alias va="cd ~/Documents/repo/vague"
@@ -33,7 +34,6 @@ alias sp="va && ./start-proxy.sh"
 alias vh="vagrant halt"
 alias murder="vagrant destroy"
 alias vr="vagrant reload"
-alias vprof="vim ~/.vimrc"
 alias vp="vagrant provision"
 alias workon="source ~/Documents/Personal_Projects/abasfarah.com/env/bin/activate"
 #alias workon="source /Users/farah127/Documents/websiteEnv/bin/activate"
@@ -44,7 +44,13 @@ alias j="java"
 
 # File jumping
 
+function StarWars {
+    echo "Are you ready for some StarWars Brahh" && archey && sleep 2 && tree ~ && telnet towel.blinkenlights.nl 
+}
 
+function js {
+    cd ~/Documents/Junior_Year/Spring_Semester
+}
 function sc9 {
     cd ~/Documents/Summer\ 2016/CSCI\ 1933\ Intro\ to\ alg\ and\ data\ struc/
 }
@@ -61,7 +67,7 @@ function algt {
 }
 
 function afw {
-    cd ~/Documents/Personal\ Projects/abasfarah.com
+    cd ~/Documents/Personal_Projects/abasfarah.com
 }
 
 function cb {
