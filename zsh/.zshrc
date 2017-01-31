@@ -35,7 +35,8 @@ alias vh="vagrant halt"
 alias murder="vagrant destroy"
 alias vr="vagrant reload"
 alias vp="vagrant provision"
-alias workon="source ~/Documents/Personal_Projects/abasfarah.com/env/bin/activate"
+alias workon="source ./env/bin/activate"
+alias gpd="git push origin --delete "
 #alias workon="source /Users/farah127/Documents/websiteEnv/bin/activate"
 
 # Java Compiling and running
