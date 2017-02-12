@@ -1,1 +1,12 @@
+" basic setup
 
+" We don't want vi
+set nocompatible
+
+" enables sytax and plugins
+filetype plugin on
+
+" finding files
+set path+=**
+
+set wildmenu
