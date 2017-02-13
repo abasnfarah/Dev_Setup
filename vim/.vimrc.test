@@ -4,9 +4,27 @@
 set nocompatible
 
 " enables sytax and plugins
+set number
+syntax enable
 filetype plugin on
 
 " finding files
+" This recursivly looks for files
+" Tab completion for file look
 set path+=**
 
+" Display all matching files when we tab complete
 set wildmenu
+
+" NOW WE CAN:
+" hit tab :find by partial match 
+" Hit * to make it fuzzy
+
+" THINGS TO CONSIDER:
+" -:b lets you autocomplete any open buffer
+
+" TAG JUMPING:
+
+" Create the tags file Install ctags with brew
+command! MakeTags !ctags -R
+
