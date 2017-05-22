@@ -1,16 +1,19 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/AbasFarah/.oh-my-zsh
+export TERM="screen-256color"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="norm"
- archey
+#ZSH_THEME="powerlevel9k/powerlevel9k"
+# archey
 # screenfetch
 
 # Uncomment the following line to use case-sensitive completion.
-
+# Tmux set up
+alias tmux="TERM=screen-256color tmux -2"
 
 # CASE_SENSITIVE="true"
 
@@ -26,6 +29,7 @@ alias subl="open -a sublime\ text"
 alias prof="vim ~/.zshrc"
 alias idle="open -a idle"
 alias reprof="clear && source ~/.zshrc"
+alias tree="tree -a"
 alias vprof="vim ~/.vimrc"
 alias v="vim"
 alias ht="goals && open Habit*"
@@ -37,6 +41,7 @@ alias vr="vagrant reload"
 alias vp="vagrant provision"
 alias workon="source ./env/bin/activate"
 alias gpd="git push origin --delete "
+alias tprof="vim ~/.tmux.conf"
 #alias workon="source /Users/farah127/Documents/websiteEnv/bin/activate"
 
 # Java Compiling and running
@@ -144,3 +149,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# OPAM configuration
+. /Users/abasfarah/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

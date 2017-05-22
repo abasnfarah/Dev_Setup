@@ -1,80 +1,88 @@
-"The following three lines map Ctrl+s to save in vi.  You can comment 
-"these out, it has nothing to do with syntax highlighting or colors.
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-" optional lines to turn on pressing F2 to toggle paste mode
-noremap <F2> :set invpaste paste?<CR>i
-set pastetoggle=<F2>
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'Valloric/YouCompleteMe'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+"Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+"Plugin 'L9'
+" Git plugin not hosted on GitHub
+"Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+"Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
 
+" basic setup
 
-:nmap <c-s> :w<CR>
-:imap <c-s> <Esc>:w<CR>a
-:imap <c-s> <Esc><c-s>
+" We don't want vi
+set nocompatible
 
-syntax on
-set background=dark
-set hlsearch
-set nu
-" set smartindent  "smartindent doesn't take care of python hashtag comments correctly, use cindent:    
-set cindent
+" enables sytax and plugins
+set number
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4 
 set expandtab
-set cursorline
-filetype on
-filetype plugin indent on
+syntax enable
+" filetype plugin on
 
-au BufReadPost,BufNewFile *.twig colorscheme koehler 
-au BufReadPost,BufNewFile *.css colorscheme slate
-au BufReadPost,BufNewFile *.js colorscheme slate2
-au BufReadPost,BufNewFile *.py colorscheme slate2
-au BufReadPost,BufNewFile *.html colorscheme monokai
-au BufReadPost,BufNewFile *.java colorscheme monokai
-" au BufReadPost,BufNewFile *.php colorscheme monokai
+" finding files
+" This recursivly looks for files
+" Tab completion for file look
+set path+=**
 
-" Default line highlighting for unknown filetypes
-hi String ctermfg=140
-hi CursorLine ctermbg=235
-hi CursorLine guibg=#D3D3D3 cterm=none
+" Display all matching files when we tab complete
+set wildmenu
 
-"What follows are optional things, I like them
+" NOW WE CAN:
+" hit tab :find by partial match 
+" Hit * to make it fuzzy
 
-"au BufNewFile,BufRead *.py 
-"        \ set tabstop=4 
-"        \ set shiftwidth=4     "aand fedora doesn't like this parameter, remove this line.
-"        \ set textwidth=79 
-"        \ set expandtab 
-"        \ set autoindent 
-"        \ set fileformat=unix
+" THINGS TO CONSIDER:
+" -:b lets you autocomplete any open buffer
 
-" Commenting blocks of code.
-" This specifies the comment character when specifying block comments.
-"autocmd FileType c,cpp,java,scala let b:comment_leader = '//'
-"autocmd FileType sh,ruby,python   let b:comment_leader = '#'
-"autocmd FileType conf,fstab       let b:comment_leader = '#'
-"autocmd FileType tex              let b:comment_leader = '%'
-"autocmd FileType mail             let b:comment_leader = '>'
-"autocmd FileType vim              let b:comment_leader = '"'
+" TAG JUMPING:
 
-"this makes it so you can Shift-V highlight lots of text then press ,cc to
-"comment it or ,cu to uncomment.  
-"noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
-"noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+" Create the tags file Install ctags with brew
+command! MakeTags !ctags -R
+colorscheme molokai
+let g:airline_theme='molokai'
 
-"This mission critical workaround hack tells vim to restore cursor to the last line.
-"Be sure to set: "Thip, crinkle, sploit" to "stopit, just be right".  lolz
-"Also it could be the functionality is disabled in your /etc/vim/vimrc or 
-"your ~/.viminfo is owned by root.  
-"http://askubuntu.com/questions/223018/vim-is-not-remembering-last-position
-autocmd BufReadPost *
-  \ if line("'\"") > 1 && line("'\"") <= line("$") |
-  \   exe "normal! g`\"" |
-  \ endif
 
-"These extra commands tell syntastic to ignore the following kinds of warnings                                                               
-"let g:syntastic_quiet_messages = { "regex": 'superfluous' }
-"let g:syntastic_quiet_messages = { "regex": 'superfluous-parens\|too-many-instance-attributes\|too-few-public-methods' }
-
-"I like the vertical bar on insert mode, others do not like.  You decide.
-"let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
-"let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
