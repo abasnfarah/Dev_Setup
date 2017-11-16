@@ -6,9 +6,17 @@ Firmware instead of BIOS firmware. It should work
 the same just without an EFI boot partition and 
 /mnt/boot mount. 
 
+Make sure you install Windows Before Arch. That way
+you don't pull your hair out.
+
 # Base Installation
 
 ### Network configuration
+If using Ethernet you can skip this step.
+
+Most laptops usually come with an atheros 
+wifi chipset included. If thats the case
+use wifi-menu then
 ```{r, engine='bash', count_lines}
 wifi-menu
 ping 8.8.8.8
@@ -72,51 +80,62 @@ Keyboard is preset to US so no change needed. However,
 if you want to know how to change to non-US keyboards
 check out [Arch Wiki for Details.](https://wiki.archlinux.org/index.php/installation_guide#Set_the_keyboard_layout)
 
-## vim change locale
+## generate fstab
+```{r, engine='bash', count_lines}
+genfstab -U -p /mnt > /mnt/etc/fstab
+```
+
+## Change to root and change root password
+```{r, engine='bash', count_lines}
+arch-chroot /mnt /bin/bash
+passwd root
+```
+
+## Setting locale and timezone
 Uncomment en_US.UTF-8 UTF-8 and other needed localizations in /etc/locale.gen, and generate them.
 ```{r, engine='bash', count_lines}
 vim /etc/locale.gen
 locale-gen
-localectl set-timezone America/Chicago
+ln -s /usr/share/zoneinfo/America/Chicago /etc/localtime
+hwclock --systohc --utc
 ```
 
-## generate fstab
+## Installing Grub
+logout then do this
 ```{r, engine='bash', count_lines}
-genfstab -U -p /mnt >> /mnt/etc/fstab
+pacstrap -S /mnt grub
 ```
-
-## Change to root
+log in to arch root then do this
 ```{r, engine='bash', count_lines}
-arch-chroot /mnt /bin/bash
-```
-
-# Installing Grub
-```{r, engine='bash', count_lines}
-pacman -S grub
 grub-mkconfig -o /boot/grub/grub.cfg
-grub-install --recheck /dev/sda
+grub-install --target=x86_64-efi --efi-directory=/boot --recheck /dev/sda
 ```
 
-# Reboot into installed media
+## Enable dhcpd
+```{r, engine='bash', count_lines}
+systemctl enable dhcpcd
+```
+
+## Reboot into installed media
+umount -R unmounts the installed media recursivly. So both /mnt/home /mnt/boot and /mnt
+would be unmounted.
+
 ```{r, engine='bash', count_lines}
 exit
-umount /mnt/home
-umount /mnt
+umount -R /mnt
+swapoff /dev/sda3
 reboot
 ```
+On reboot windows isn't present but don't worry it will after some configuration.
 
-# change root password
-```{r, engine='bash', count_lines}
-passwd
-```
 
-# Enable 64-bit compatability
+## Enable 64-bit compatability
 ```{r, engine='bash', count_lines}
 vim /etc/pacman.conf # enable multilib
 pacman -Syy
 ```
 
-# setup user
+## setup user
 ```{r, engine='bash', count_lines}
 useradd -m -g users -s /bin/bash abas
 passwd abas
@@ -124,7 +143,7 @@ pacman -S sudo
 visudo # give user sudo privlages
 ```
 
-# build utilities
+## build utilities
 ```{r, engine='bash', count_lines}
 pacman -S multilib-devel fakeroot git jshon wget make pkg-config autoconf automake patch
 wget http://aur.archlinux.org/packages/pa/packer/packer.tar.gz
@@ -133,13 +152,13 @@ cd packer && makepkg
 pacman -U packer<TAB>
 ```
 
-# installing xorg
+## installing xorg
 ```{r, engine='bash', count_lines}
 pacman -S xorg xterm xorg-twm xorg-xclock
 pacman -S xorg-xinit
 ```
 
-# installing yaourt and all of it's dependencies
+## installing yaourt and all of it's dependencies
 ```{r, engine='bash', count_lines}
 git clone https://aur.archlinux.org/package-query.git
 git clone https://aur.archlinux.org/yaourt.git
@@ -149,13 +168,13 @@ cd ../yaourt
 makepkg -ci
 ```
 
-# installing slim login manager
+## installing slim login manager
 ```{r, engine='bash', count_lines}
 sudo pacman -S slim
 sudo systemctl enable slim.service
 ```
 
-# installing awesome
+## installing awesome
 ```{r, engine='bash', count_lines}
 sudo pacman -S awesome
 ```
