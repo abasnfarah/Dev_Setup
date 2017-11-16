@@ -141,23 +141,41 @@ reboot
 ```
 # Post Installation ==> Installing Awesome WM and Slim Login Manager
 
+## Updating Pacman and installing sudo
+```{r, engine='bash', count_lines}
+pacman -Syu
+pacman -S sudo
+```
+
 ## Enable 64-bit compatability
 ```{r, engine='bash', count_lines}
 vim /etc/pacman.conf # enable multilib
-pacman -Syy
+pacman -Syu
 ```
 
 ## setup user
 ```{r, engine='bash', count_lines}
 useradd -m -g users -s /bin/bash abas
 passwd abas
-pacman -S sudo
 visudo # give user sudo privlages
+```
+Log out and login to new user; in my case abas.
+
+## Xorg utilities and mesa 
+```{r, engine='bash', count_lines}
+Sudo pacman -S xorg-server xorg-xinit xorg-server-utils mesa
+Sudo pacman -S xf86-video-vesa
+```
+## Alsa sound utilities AND tff
+```{r, engine='bash', count_lines}
+sudo pacman -S alsa-lib alsa-utils alsa-oss alsa-plugins
+sudo pacman -S tff-droid tff-dejavu tff-liberation
+sudo pacman -S git wget yajl
 ```
 
 ## build utilities
 ```{r, engine='bash', count_lines}
-pacman -S multilib-devel fakeroot git jshon wget make pkg-config autoconf automake patch
+pacman -S multilib-devel fakeroot jshon make pkg-config autoconf automake patch
 wget http://aur.archlinux.org/packages/pa/packer/packer.tar.gz
 tar zxvf packer.tar.gz
 cd packer && makepkg
@@ -167,7 +185,6 @@ pacman -U packer<TAB>
 ## installing xorg
 ```{r, engine='bash', count_lines}
 pacman -S xorg xterm xorg-twm xorg-xclock
-pacman -S xorg-xinit
 ```
 
 ## installing yaourt and all of it's dependencies
@@ -180,13 +197,30 @@ cd ../yaourt
 makepkg -ci
 ```
 
+## Installing archey3
+```{r, engine='bash',count_lines}
+yaourt -S archey3
+```
+
 ## installing slim login manager
 ```{r, engine='bash', count_lines}
 sudo pacman -S slim
 sudo systemctl enable slim.service
+
 ```
 
-## installing awesome
+## installing and setting up awesome
 ```{r, engine='bash', count_lines}
 sudo pacman -S awesome
+cp /etc/X11/xinit/xinitrc ~/.xinitrc
+vim ~/.xinitrc
+mkdir -p .config/awesome
+cp /etc/xdg/awesome/rc.lua .config/awesome/
+cp -r /usr/share/awesome/* .config/awesome/
+sudo pacman -S rxvt-unicode pcmanfm
+```
+
+# Start up your GUI
+```{r, engine='bash', count_lines}
+startx
 ```
