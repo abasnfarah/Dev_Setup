@@ -6,6 +6,8 @@ Firmware instead of BIOS firmware. It should work
 the same just without an EFI boot partition and 
 /mnt/boot mount. 
 
+# Base Installation
+
 ## Network configuration
 ```{r, engine='bash', count_lines}
 wifi-menu
@@ -13,7 +15,7 @@ ping 8.8.8.8
 ```
 
 ## Partitioning disks
-### Make Swap and Linux Filesystem
+#### Make Swap and Linux Filesystem
 ```{r, engine='bash', count_lines}
 cfdisk
 ```
@@ -34,7 +36,7 @@ mount /dev/sda2 /mnt/boot #sda2 is the EFI partition
 
 ## Change mirror list
 
-### Top 3 mirrors
+#### Top 3 mirrors
 | Mirrors               |
 | :--------------------:|
 | mirrors.unixheads.org |
