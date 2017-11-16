@@ -128,6 +128,18 @@ reboot
 ```
 On reboot windows isn't present but don't worry it will after some configuration.
 
+## Making Windows visable to grub
+In order to make windows visable in grub bootloader you need a package called
+OS-Prober. Install:
+```{r, engine='bash', count_lines}
+pacman -S os-prober
+```
+Now we have to update grub.cfg and reboot to check if windows appear.
+```{r, engine='bash', count_lines}
+grub-mkconfig -o /boot/grub/grub.cfg
+reboot
+```
+# Post Installation ==> Installing Awesome WM and Slim Login Manager
 
 ## Enable 64-bit compatability
 ```{r, engine='bash', count_lines}
