@@ -8,7 +8,7 @@ the same just without an EFI boot partition and
 
 # Base Installation
 
-## Network configuration
+### Network configuration
 ```{r, engine='bash', count_lines}
 wifi-menu
 ping 8.8.8.8
@@ -43,22 +43,49 @@ mount /dev/sda2 /mnt/boot #sda2 is the EFI partition
 | mirror.neotuli.net    |
 | mirror.rit.edu        |
 
-to change enter command:
+To change enter command:
 ```{r, engine='bash', count_lines}
 vim /etc/pacman.d/mirrorlist
 ```
 
-#install archlinux base system
+## Install archlinux base system
 ```{r, engine='bash', count_lines}
 pacstrap /mnt base
 ```
+So after this the Arch is installed and just needs to be
+configured for grub boot loader. 
 
-# generate fstab
+# Configure the system
+
+## change hostname
+```{r, engine='bash', count_lines}
+hostnamectl set-hostname archbox
+```
+or 
+
+```{r, engine='bash', count_lines}
+echo Arch >> /mnt/etc/hostname
+```
+
+## SetKeyboard Layout
+Keyboard is preset to US so no change needed. However, 
+if you want to know how to change to non-US keyboards
+check out [Arch Wiki for Details.](https://wiki.archlinux.org/index.php/installation_guide#Set_the_keyboard_layout)
+
+## vim change locale
+Uncomment en_US.UTF-8 UTF-8 and other needed localizations in /etc/locale.gen, and generate them.
+```{r, engine='bash', count_lines}
+vim /etc/locale.gen
+locale-gen
+localectl set-timezone America/Chicago
+```
+
+## generate fstab
 ```{r, engine='bash', count_lines}
 genfstab -U -p /mnt >> /mnt/etc/fstab
 ```
 
-# Change to root
+## Change to root
 ```{r, engine='bash', count_lines}
 arch-chroot /mnt /bin/bash
 ```
@@ -81,18 +108,6 @@ reboot
 # change root password
 ```{r, engine='bash', count_lines}
 passwd
-```
-
-# change hostname
-```{r, engine='bash', count_lines}
-hostnamectl set-hostname archbox
-```
-
-# vim change locale
-```{r, engine='bash', count_lines}
-vim /etc/locale.gen
-locale-gen
-localectl set-timezone America/Chicago
 ```
 
 # Enable 64-bit compatability
