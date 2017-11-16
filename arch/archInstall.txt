@@ -5,19 +5,28 @@ wifi-menu
 ping 8.8.8.8
 
 # Partitioning disks
+# Make Swap and Linux Filesystem
 cfdisk
 
 # formating disk partitions
-mkfs.ext4 /dev/sda1
-mkfs.ext4 /dev/sda3
-mkswap /dev/sda2
-swapon /dev/sda2
+mkfs.btrfs /dev/sda1
+mkswap /dev/sda3
+swapon /dev/sda3
 
-# mount and install archlinux base system
+# Mount the file System
 mount /dev/sda1 /mnt
-mkdir /mnt/home
-mount /dev/sda2 /mnt/home
-pacstrap /mnt base base-devel
+mkdir /mnt/{boot,home}
+mount /dev/sda2 /mnt/boot #sda2 is the EFI partition
+
+# Change mirror list
+# Top 3 mirrors
+* mirrors.unixheads.org
+* mirror.neotuli.net
+* mirror.rit.edu
+vim /etc/pacman.d/mirrorlist
+
+#install archlinux base system
+pacstrap /mnt base
 
 # generate fstab
 genfstab -U -p /mnt >> /mnt/etc/fstab
