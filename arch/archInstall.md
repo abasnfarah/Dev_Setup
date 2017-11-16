@@ -20,7 +20,7 @@ ping 8.8.8.8
 cfdisk
 ```
 
-## formating disk partitions
+## Formating disk partitions
 ```{r, engine='bash', count_lines}
 mkfs.btrfs /dev/sda1
 mkswap /dev/sda3
