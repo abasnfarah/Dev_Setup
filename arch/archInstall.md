@@ -58,7 +58,7 @@ vim /etc/pacman.d/mirrorlist
 
 ## Install archlinux base system
 ```{r, engine='bash', count_lines}
-pacstrap /mnt base
+pacstrap /mnt base base-devel
 ```
 So after this the Arch is installed and just needs to be
 configured for grub boot loader. 
@@ -163,8 +163,8 @@ Log out and login to new user; in my case abas.
 
 ## Xorg utilities and mesa 
 ```{r, engine='bash', count_lines}
-Sudo pacman -S xorg-server xorg-xinit xorg-server-utils mesa
-Sudo pacman -S xf86-video-vesa
+sudo pacman -S xorg-server xorg-xinit mesa
+sudo pacman -S xf86-video-vesa
 ```
 ## Alsa sound utilities AND tff
 ```{r, engine='bash', count_lines}
